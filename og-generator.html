@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+    background: #0f1923;
+  }
+
+  /* City background image */
+  .city-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.25;
+  }
+
+  /* Dark gradient overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(10,18,28,0.95) 0%, rgba(15,25,35,0.80) 40%, rgba(20,30,45,0.70) 100%);
+  }
+
+  /* Subtle tech grid */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Orange accent bar top */
+  .accent-bar {
+    position: absolute;
+    left: 0; top: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #F26419 0%, #F58240 50%, transparent 100%);
+  }
+
+  .layout {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 36px;
+    gap: 36px;
+  }
+
+  /* Circle photo */
+  .photo-wrapper {
+    flex-shrink: 0;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(242,100,25,0.5);
+    box-shadow:
+      0 0 0 8px rgba(242,100,25,0.08),
+      0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Text side */
+  .text-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .top-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F26419;
+  }
+
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+  }
+
+  .name em {
+    font-style: italic;
+    color: #F26419;
+  }
+
+  .tagline {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    max-width: 580px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 4px;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #F26419;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .tags {
+    display: flex;
+    gap: 7px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+
+  .url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Decorative elements */
+  .deco-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(242,100,25,0.1);
+  }
+  .deco-1 { width: 400px; height: 400px; right: -120px; bottom: -120px; }
+  .deco-2 { width: 200px; height: 200px; right: -30px; top: -60px; }
+
+  .deco-line {
+    position: absolute;
+    background: rgba(242,100,25,0.08);
+  }
+  .line-1 { width: 1px; height: 120px; right: 200px; top: 40px; }
+  .line-2 { width: 80px; height: 1px; right: 160px; top: 160px; }
+
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #F26419;
+  }
+  .dot-1 { width: 6px; height: 6px; right: 198px; top: 38px; opacity: 0.4; }
+  .dot-2 { width: 4px; height: 4px; right: 158px; top: 158px; opacity: 0.25; }
+</style>
+</head>
+<body>
+  <div class="city-bg"></div>
+  <div class="overlay"></div>
+  <div class="grid-bg"></div>
+  <div class="accent-bar"></div>
+
+  <div class="deco-ring deco-1"></div>
+  <div class="deco-ring deco-2"></div>
+  <div class="deco-line line-1"></div>
+  <div class="deco-line line-2"></div>
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+
+  <div class="layout">
+    <div class="photo-wrapper">
+      <img src="photo.jpg" alt="Lena Fang" />
+    </div>
+    <div class="text-side">
+      <div class="top-label">Analytics Portfolio</div>
+      <div class="name">Lena <em>Fang</em></div>
+      <div class="tagline">Causal inference, KPI design & cross-functional analytics leadership across fintech, big tech & retail</div>
+      <div class="stats">
+        <div class="stat-item"><span class="stat-num">9+</span><span class="stat-label">Years Experience</span></div>
+        <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Industries</span></div>
+        <div class="stat-item"><span class="stat-num">Global</span><span class="stat-label">Markets</span></div>
+      </div>
+      <div class="tags">
+        <span class="tag">Causal Inference</span>
+        <span class="tag">KPI Design</span>
+        <span class="tag">A/B Testing</span>
+        <span class="tag">SQL / Python</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">LTV</span>
+      </div>
+      <div class="url">lenafang.github.io/work.portfolio</div>
+    </div>
+  </div>
+</body>
+</html>

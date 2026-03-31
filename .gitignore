@@ -1,0 +1,11 @@
+# Only publish portfolio/ — ignore everything else
+*.docx
+*.doc
+*.xlsx
+*.pdf
+*.md
+forme/
+docs/
+.claude/
+.DS_Store
+**/.DS_Store
